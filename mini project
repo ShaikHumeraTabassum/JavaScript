@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+class BankAccount {
+    private String accountNumber;
+    private double balance;
+
+    public BankAccount(String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.printf("Deposited %.2f. New balance is %.2f.%n", amount, balance);
+    }
+
+    public void withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient balance.");
+        } else {
+            balance -= amount;
+            System.out.printf("Withdrew %.2f. New balance is %.2f.%n", amount, balance);
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        BankAccount account = new BankAccount("123456789", 1000);
+
+        System.out.printf("Account number: %s%nBalance: %.2f%n", account.getAccountNumber(), account.getBalance());
+
+        System.out.print("Enter amount to deposit: ");
+        double depositAmount = input.nextDouble();
+        account.deposit(depositAmount);
+
+        System.out.print("Enter amount to withdraw: ");
+        double withdrawAmount = input.nextDouble();
+        account.withdraw(withdrawAmount);
+
+        input.close();
+    }
+}
